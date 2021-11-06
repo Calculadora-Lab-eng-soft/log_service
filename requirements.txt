@@ -1,0 +1,4 @@
+pymongo==3.10.1
+flask
+flask_cors
+dnspython
