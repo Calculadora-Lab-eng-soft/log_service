@@ -16,10 +16,10 @@ def create_log():
   return { 'response': 'success'}
 
 
-@app.route('/')
+@app.route('/',  methods=['POST', 'GET'])
 def home():
   res = controller.findAll()
 
-  return { 'response': res}
+  return { 'logs': res}
 
 app.run(port=5003)
