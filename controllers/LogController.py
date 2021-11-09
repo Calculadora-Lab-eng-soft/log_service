@@ -13,8 +13,6 @@ class LogController:
         self.db.session.add(new_log)
         self.db.session.commit()
 
-        return "ok"
-
     def index(self):
         logs_objetos = Log.query.all()
 

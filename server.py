@@ -11,7 +11,7 @@ CORS(app)
 def add():
     controller.create(request.json)
 
-    return "ok"
+    return {"status_text": "success", "status": 201}
 
 
 @app.route("/", methods=["POST", "GET"])
