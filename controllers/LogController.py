@@ -1,21 +1,23 @@
-from models.database import Database
-from bson.json_util import dumps
+from models.database import Log, db
 
-class LogController():
-  def __init__(self):
-    self.db_model = Database()
-    self.db = self.db_model.getDB()
 
-  def create(self, new_log):
-    logs = self.db.logs
+class LogController:
+    def __init__(self):
+        self.db = db
 
-    logs.insert_one(new_log)
+    def create(self, log):
+        new_log = Log(
+            log["type"], log["operation"], log["arguments"], log["created_at"]
+        )
 
-    return 
+        self.db.session.add(new_log)
+        self.db.session.commit()
 
-  def findAll(self):
-    logs = self.db.logs
+        return "ok"
 
-    json_logs = dumps(list(logs.find()))
+    def index(self):
+        logs_objetos = Log.query.all()
 
-    return json_logs
+        logs_json = [log.to_json() for log in logs_objetos]
+
+        return logs_json

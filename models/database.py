@@ -1,10 +1,33 @@
-from pymongo import MongoClient
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from dataclasses import dataclass
 
-class Database():
-  def __init__(self):
-    self.client = MongoClient("mongodb+srv://messiasleonardo:messiasleonardo@cluster0.y0p1v.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
-    self.db = self.client.get_database('calc_db')
+app = Flask(__name__)
+app.config[
+    "SQLALCHEMY_DATABASE_URI"
+] = "mysql+mysqlconnector://root:root@localhost:3306/teste"
 
-  def getDB(self):
-    return self.db
-    
+db = SQLAlchemy(app)
+
+
+@dataclass
+class Log(db.Model):
+    id = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
+    type = db.Column(db.String(20))
+    operation = db.Column(db.String(20))
+    arguments = db.Column(db.String(20))
+    created_at = db.Column(db.String(20))
+
+    def __init__(self, type, operation, arguments, created_at):
+        self.type = type
+        self.operation = operation
+        self.arguments = arguments
+        self.created_at = created_at
+
+    def to_json(self):
+        return {
+            "type": self.type,
+            "operation": self.operation,
+            "arguments": self.arguments,
+            "created_at": self.created_at,
+        }

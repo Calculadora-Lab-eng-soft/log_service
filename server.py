@@ -1,25 +1,27 @@
-from flask import Flask, request
 from flask_cors import CORS
-from controllers import LogController
+from flask import request, Response
+from models.database import app, db
+from controllers.LogController import LogController
+import json
 
-app = Flask(__name__)
-controller = LogController.LogController()
 CORS(app)
 
 
-@app.route('/create', methods=['POST'])
-def create_log():
-  log = request.json
+@app.route("/add", methods=["POST"])
+def add():
+    controller.create(request.json)
 
-  controller.create(log)
-
-  return { 'response': 'success'}
+    return "ok"
 
 
-@app.route('/',  methods=['POST', 'GET'])
-def home():
-  res = controller.findAll()
+@app.route("/", methods=["POST", "GET"])
+def get():
+    logs = controller.index()
 
-  return { 'logs': res}
+    return Response(json.dumps(logs))
 
-app.run(port=5003)
+
+if __name__ == "__main__":
+    controller = LogController()
+    db.create_all()
+    app.run(port=5050)
