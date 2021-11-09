@@ -24,4 +24,4 @@ def get():
 if __name__ == "__main__":
     controller = LogController()
     db.create_all()
-    app.run(port=5050)
+    app.run(port=5003)

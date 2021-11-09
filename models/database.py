@@ -16,7 +16,7 @@ class Log(db.Model):
     type = db.Column(db.String(20))
     operation = db.Column(db.String(20))
     arguments = db.Column(db.String(20))
-    created_at = db.Column(db.String(20))
+    created_at = db.Column(db.String(50))
 
     def __init__(self, type, operation, arguments, created_at):
         self.type = type
@@ -31,3 +31,6 @@ class Log(db.Model):
             "arguments": self.arguments,
             "created_at": self.created_at,
         }
+
+
+db.create_all()
