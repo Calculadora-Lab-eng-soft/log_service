@@ -13,9 +13,9 @@ db = SQLAlchemy(app)
 @dataclass
 class Log(db.Model):
     id = db.Column("id", db.Integer, primary_key=True, autoincrement=True)
-    type = db.Column(db.String(20))
-    operation = db.Column(db.String(20))
-    arguments = db.Column(db.String(20))
+    type = db.Column(db.String(50))
+    operation = db.Column(db.String(50))
+    arguments = db.Column(db.String(50))
     created_at = db.Column(db.String(50))
 
     def __init__(self, type, operation, arguments, created_at):
