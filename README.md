@@ -75,5 +75,7 @@ $ python3 server.py
 ```
 
 
+Acesse http://127.0.0.1:5005/
+
 ## Segue o Vídeo abaixo com a demosntração da execução do projeto
 https://www.loom.com/share/f7a72762581143268b1f05d28b683985
